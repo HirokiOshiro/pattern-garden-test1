@@ -294,7 +294,7 @@ const App = () => {
 
           {/* 最近の体験共有 */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">最近の体験共有</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">💬 最近の体験共有</h2>
             <div className="space-y-4">
               {posts.slice(0, 3).map(post => (
                 <div key={post.id} className="post-card bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow">
@@ -372,7 +372,7 @@ const App = () => {
                 disabled={loading}
               >
                 <span>➕</span>
-                <span>体験を共有</span>
+                <span>💬 体験を共有</span>
               </button>
             </div>
           </div>
@@ -380,36 +380,36 @@ const App = () => {
           {/* 投稿フォーム */}
           {showPostForm && (
             <div className="bg-white rounded-xl p-6 shadow-sm border mb-8">
-              <h3 className="font-bold text-lg text-gray-900 mb-4">あなたの体験を共有してください</h3>
+              <h3 className="font-bold text-lg text-gray-900 mb-4">💬 あなたの体験を共有してください</h3>
               <form onSubmit={handlePostSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">どんな状況でしたか？</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">🗺️ どんな状況でしたか？</label>
                   <textarea 
                     className="w-full p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
                     rows="2"
-                    placeholder="具体的な状況を教えてください"
+                    placeholder="🗺️ 具体的な状況を教えてください"
                     value={newPost.situation}
                     onChange={(e) => setNewPost({...newPost, situation: e.target.value})}
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">どんな行動を取りましたか？</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">🚲 どんな行動を取りましたか？</label>
                   <textarea 
                     className="w-full p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
                     rows="2"
-                    placeholder="このパターンを使ってどう行動したか教えてください"
+                    placeholder="🚲 このパターンを使ってどう行動したか教えてください"
                     value={newPost.action}
                     onChange={(e) => setNewPost({...newPost, action: e.target.value})}
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">振り返ってどうでしたか？</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">💡 振り返ってどうでしたか？</label>
                   <textarea 
                     className="w-full p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
                     rows="2"
-                    placeholder="気づきや学びを教えてください"
+                    placeholder="💡 気づきや学びを教えてください"
                     value={newPost.reflection}
                     onChange={(e) => setNewPost({...newPost, reflection: e.target.value})}
                     required
@@ -437,7 +437,7 @@ const App = () => {
 
           {/* このパターンの体験一覧 */}
           <div>
-            <h3 className="font-bold text-lg text-gray-900 mb-4">みんなの体験</h3>
+            <h3 className="font-bold text-lg text-gray-900 mb-4">💬 みんなの体験</h3>
             <div className="space-y-4">
               {patternPosts.map(post => (
                 <div key={post.id} className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow">
@@ -482,7 +482,7 @@ const App = () => {
               </button>
               <div>
                 <h1 className="text-xl font-bold text-gray-900">コミュニティ</h1>
-                <p className="text-gray-600">みんなの学習体験を見てみよう</p>
+                <p className="text-gray-600">💬 みんなの学習体験を見てみよう</p>
               </div>
             </div>
           </div>
