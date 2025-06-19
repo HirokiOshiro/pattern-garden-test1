@@ -303,15 +303,15 @@ const App = () => {
                   </div>
                   <div className="space-y-3">
                     <div>
-                      <span className="font-medium text-gray-700">状況: </span>
+                      <span className="font-medium text-gray-700">🗺️ 状況: </span>
                       <span className="text-gray-600">{post.situation}</span>
                     </div>
                     <div>
-                      <span className="font-medium text-gray-700">行動: </span>
+                      <span className="font-medium text-gray-700">🚲 行動: </span>
                       <span className="text-gray-600">{post.action}</span>
                     </div>
                     <div>
-                      <span className="font-medium text-gray-700">振り返り: </span>
+                      <span className="font-medium text-gray-700">💡 振り返り: </span>
                       <span className="text-gray-600">{post.reflection}</span>
                     </div>
                   </div>
@@ -446,15 +446,15 @@ const App = () => {
                   </div>
                   <div className="space-y-3">
                     <div>
-                      <span className="font-medium text-gray-700">🗺️状況: </span>
+                      <span className="font-medium text-gray-700">🗺️ 状況: </span>
                       <span className="text-gray-600">{post.situation}</span>
                     </div>
                     <div>
-                      <span className="font-medium text-gray-700">🚲行動: </span>
+                      <span className="font-medium text-gray-700">🚲 行動: </span>
                       <span className="text-gray-600">{post.action}</span>
                     </div>
                     <div>
-                      <span className="font-medium text-gray-700">💡振り返り: </span>
+                      <span className="font-medium text-gray-700">💡 振り返り: </span>
                       <span className="text-gray-600">{post.reflection}</span>
                     </div>
                   </div>
@@ -504,15 +504,15 @@ const App = () => {
                 </div>
                 <div className="space-y-3">
                   <div>
-                    <span className="font-medium text-gray-700">🗺️状況: </span>
+                    <span className="font-medium text-gray-700">🗺️ 状況: </span>
                     <span className="text-gray-600">{post.situation}</span>
                   </div>
                   <div>
-                    <span className="font-medium text-gray-700">🚲行動: </span>
+                    <span className="font-medium text-gray-700">🚲 行動: </span>
                     <span className="text-gray-600">{post.action}</span>
                   </div>
                   <div>
-                    <span className="font-medium text-gray-700">💡振り返り: </span>
+                    <span className="font-medium text-gray-700">💡 振り返り: </span>
                     <span className="text-gray-600">{post.reflection}</span>
                   </div>
                 </div>
