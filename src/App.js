@@ -246,12 +246,12 @@ const App = () => {
           {/* パターン一覧 */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">学習パターン</h2>
+              <h2 className="text-2xl font-bold text-gray-900">🛠️ 学習パターン</h2>
               <button 
                 onClick={() => setCurrentView('community')}
                 className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors mr-4"
               >
-                みんなの体験を見る
+                💬 みんなの体験を見る
               </button>
             </div>
             
