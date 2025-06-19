@@ -387,7 +387,7 @@ const App = () => {
                   <textarea 
                     className="w-full p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
                     rows="2"
-                    placeholder="🗺️ 具体的な状況を教えてください"
+                    placeholder="具体的な状況を教えてください"
                     value={newPost.situation}
                     onChange={(e) => setNewPost({...newPost, situation: e.target.value})}
                     required
@@ -398,7 +398,7 @@ const App = () => {
                   <textarea 
                     className="w-full p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
                     rows="2"
-                    placeholder="🚲 このパターンを使ってどう行動したか教えてください"
+                    placeholder="このパターンを使ってどう行動したか教えてください"
                     value={newPost.action}
                     onChange={(e) => setNewPost({...newPost, action: e.target.value})}
                     required
@@ -409,7 +409,7 @@ const App = () => {
                   <textarea 
                     className="w-full p-3 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-green-500"
                     rows="2"
-                    placeholder="💡 気づきや学びを教えてください"
+                    placeholder="気づきや学びを教えてください"
                     value={newPost.reflection}
                     onChange={(e) => setNewPost({...newPost, reflection: e.target.value})}
                     required
