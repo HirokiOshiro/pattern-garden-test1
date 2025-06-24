@@ -404,7 +404,7 @@ const App = () => {
           <div className="max-w-6xl mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-yellow-400 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-lg">🌱</span>
                 </div>
                 <div>
@@ -423,12 +423,12 @@ const App = () => {
         <main className="max-w-6xl mx-auto px-4 py-8">
           
           {/* 今週のチャレンジ */}
-          <div className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl p-6 text-white mb-8">
+          <div className="bg-gradient-to-r from-green-400 to-yellow-400 rounded-2xl p-6 text-white mb-8">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-bold mb-2">今週のパターンチャレンジ</h2>
-                <p className="text-purple-100">「問いかけの力」を実践してみよう</p>
-                <div className="flex items-center mt-3 space-x-4 text-sm text-purple-100">
+                <p className="text-green-100">「問いかけの力」を実践してみよう</p>
+                <div className="flex items-center mt-3 space-x-4 text-sm text-green-100">
                   <span className="flex items-center space-x-1">
                     <span>👥</span>
                     <span>参加者 6人</span>
