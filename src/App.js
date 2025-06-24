@@ -471,8 +471,8 @@ const App = () => {
             {['core', 'opportunity', 'creation', 'openness'].map(category => {
               const categoryPatterns = learningPatterns.filter(p => p.category === category);
               return (
-                <div key={category} className="mb-10">
-                  <div className="flex items-center space-x-3 mb-4">
+                <div key={category} className="mb-12">
+                  <div className="flex items-center space-x-3 mb-6">
                     <h3 className={`text-lg font-bold px-3 py-1 rounded-full border ${getCategoryColor(category)}`}>
                       {getCategoryName(category)}
                     </h3>
@@ -481,25 +481,25 @@ const App = () => {
                     </span>
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {categoryPatterns.map(pattern => (
                       <div 
                         key={pattern.id}
-                        className="pattern-card bg-white rounded-xl p-5 shadow-sm border hover:shadow-lg transition-all cursor-pointer transform hover:-translate-y-1"
+                        className="pattern-card bg-white rounded-xl p-6 shadow-sm border hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
                         onClick={() => {
                           setSelectedPattern(pattern);
                           setCurrentView('pattern-detail');
                         }}
                       >
-                        <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center justify-between mb-4">
                           <span className="text-2xl">{pattern.icon}</span>
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getProgressColor(pattern.myProgress)}`}>
                             {pattern.myProgress}
                           </span>
                         </div>
-                        <h4 className="font-bold text-md text-gray-900 mb-2">{pattern.name}</h4>
-                        <p className="text-gray-600 text-sm mb-3 overflow-hidden" style={{display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical'}}>{pattern.description}</p>
-                        <div className="flex items-center justify-between text-sm text-gray-500">
+                        <h4 className="font-bold text-md text-gray-900 mb-3">{pattern.name}</h4>
+                        <p className="text-gray-600 text-sm mb-4 overflow-hidden leading-relaxed" style={{display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical'}}>{pattern.description}</p>
+                        <div className="flex items-center justify-between text-sm text-gray-500 pt-2 border-t border-gray-100">
                           <span className="flex items-center space-x-1">
                             <span>📝</span>
                             <span>{getPatternPostCount(pattern.id)}件</span>
