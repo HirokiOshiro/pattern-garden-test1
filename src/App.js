@@ -16,67 +16,245 @@ const App = () => {
     reflection: ''
   });
 
-  // 学習パターンのデータ
+  // 学習パターンのデータ（拡張版）
   const learningPatterns = [
+    // Core パターン
     {
       id: 1,
-      name: "学習への情熱",
-      subtitle: "Learning Passion",
-      description: "学ぶことへの純粋な興味と情熱を大切にし、それを維持し続ける",
-      icon: "🔥",
-      category: "motivation",
+      name: "創造的な学び",
+      subtitle: "Creative Learning",
+      description: "既存の知識を組み合わせて新しいアイデアや解決策を生み出す学び方",
+      icon: "🎨",
+      category: "core",
       myProgress: "実践中"
     },
     {
       id: 2,
+      name: "学びのチャンス",
+      subtitle: "Learning Opportunities",
+      description: "日常の中に潜む学びの機会を見逃さず、積極的に捉える",
+      icon: "🎯",
+      category: "core",
+      myProgress: "学習中"
+    },
+    {
+      id: 3,
+      name: "つくることによる学び",
+      subtitle: "Learning by Making",
+      description: "実際に何かを作る過程で深い理解と気づきを得る",
+      icon: "🔨",
+      category: "core",
+      myProgress: "実践中"
+    },
+    {
+      id: 4,
+      name: "学びをひらく",
+      subtitle: "Opening Learning",
+      description: "自分の学びを他者と共有し、新たな視点を得る",
+      icon: "🌈",
+      category: "core",
+      myProgress: "未着手"
+    },
+
+    // Opportunity パターン
+    {
+      id: 5,
+      name: "まずはつかる",
+      subtitle: "Diving In First",
+      description: "理論よりもまず実践に飛び込んで、体験から学ぶ",
+      icon: "🏊",
+      category: "opportunity",
+      myProgress: "マスター"
+    },
+    {
+      id: 6,
+      name: "まねぶことから",
+      subtitle: "Learning by Imitating",
+      description: "優れた手本を真似することから学びを始める",
+      icon: "🪞",
+      category: "opportunity",
+      myProgress: "実践中"
+    },
+    {
+      id: 7,
+      name: "教わり上手になる",
+      subtitle: "Being a Good Student",
+      description: "他者から効果的に学ぶための姿勢とスキルを身につける",
+      icon: "🎓",
+      category: "opportunity",
+      myProgress: "学習中"
+    },
+    {
+      id: 8,
+      name: "アウトプットから始まる学び",
+      subtitle: "Output-Driven Learning",
+      description: "成果物を作ることを出発点として学びを深める",
+      icon: "📝",
+      category: "opportunity",
+      myProgress: "実践中"
+    },
+    {
+      id: 9,
+      name: "学びのなかの遊び",
+      subtitle: "Play in Learning",
+      description: "遊び心を持って学習に取り組み、楽しみながら身につける",
+      icon: "🎮",
+      category: "opportunity",
+      myProgress: "マスター"
+    },
+    {
+      id: 10,
+      name: "学びの竜巻",
+      subtitle: "Learning Tornado",
+      description: "興味のあることに集中して一気に学習を進める",
+      icon: "🌪️",
+      category: "opportunity",
+      myProgress: "実践中"
+    },
+    {
+      id: 11,
+      name: "知のワクワク",
+      subtitle: "Intellectual Excitement",
+      description: "知識を学ぶ楽しさや興奮を大切にし、学習への動機を維持する",
+      icon: "⚡",
+      category: "opportunity",
+      myProgress: "実践中"
+    },
+    {
+      id: 12,
+      name: "量は質を生む",
+      subtitle: "Quantity Breeds Quality",
+      description: "まずは量をこなすことで質の向上を図る",
+      icon: "🔢",
+      category: "opportunity",
+      myProgress: "学習中"
+    },
+
+    // Creation パターン
+    {
+      id: 13,
+      name: "動きのなかで考える",
+      subtitle: "Thinking in Motion",
+      description: "行動しながら考え、考えながら行動する",
+      icon: "🏃",
+      category: "creation",
+      myProgress: "実践中"
+    },
+    {
+      id: 14,
+      name: "プロトタイピング",
+      subtitle: "Prototyping",
+      description: "アイデアを素早く形にして検証と改善を繰り返す",
+      icon: "🛠️",
+      category: "creation",
+      myProgress: "実践中"
+    },
+    {
+      id: 15,
+      name: "フィールドに飛び込む",
+      subtitle: "Jumping into the Field",
+      description: "実際の現場に身を置いて生きた学びを得る",
+      icon: "🌍",
+      category: "creation",
+      myProgress: "学習中"
+    },
+    {
+      id: 16,
+      name: "鳥の眼と虫の眼",
+      subtitle: "Bird's Eye and Bug's Eye",
+      description: "全体を俯瞰する視点と詳細を見る視点を使い分ける",
+      icon: "🦅",
+      category: "creation",
+      myProgress: "学習中"
+    },
+    {
+      id: 17,
+      name: "隠れた関係性から学ぶ",
+      subtitle: "Learning from Hidden Connections",
+      description: "表面上は関係なさそうなものの間にある繋がりを見つける",
+      icon: "🔍",
+      category: "creation",
+      myProgress: "実践中"
+    },
+    {
+      id: 18,
+      name: "探究への情熱",
+      subtitle: "Passion for Inquiry",
+      description: "知りたいという強い欲求を持ち続けて学び続ける",
+      icon: "🔥",
+      category: "creation",
+      myProgress: "実践中"
+    },
+    {
+      id: 19,
+      name: "小さく生んで大きく育てる",
+      subtitle: "Start Small, Grow Big",
+      description: "小さなアイデアから始めて徐々に発展させる",
+      icon: "🌱",
+      category: "creation",
+      myProgress: "実践中"
+    },
+
+    // Openness パターン
+    {
+      id: 20,
+      name: "学びの共同体をつくる",
+      subtitle: "Creating Learning Community",
+      description: "共に学ぶ仲間との関係性を築き、相互に成長する",
+      icon: "👥",
+      category: "openness",
+      myProgress: "実践中"
+    },
+    {
+      id: 21,
       name: "問いかけの力",
       subtitle: "Power of Questions",
       description: "良い問いを投げかけることで、深い学びと気づきを生み出す",
       icon: "❓",
-      category: "dialogue",
+      category: "openness",
       myProgress: "マスター"
     },
     {
-      id: 3,
-      name: "アイデアを育てる",
-      subtitle: "Nurturing Ideas",
-      description: "小さなアイデアの種を大切に育て、創造的な成果につなげる",
-      icon: "🌱",
-      category: "creativity",
-      myProgress: "学習中"
+      id: 22,
+      name: "はなすことでわかる",
+      subtitle: "Understanding Through Talking",
+      description: "他者に話すことで自分の理解を深める",
+      icon: "💬",
+      category: "openness",
+      myProgress: "マスター"
     },
     {
-      id: 4,
-      name: "振り返りの習慣",
-      subtitle: "Reflection Practice",
-      description: "経験を意味のある学びに変える振り返りを習慣化する",
-      icon: "🪞",
-      category: "reflection",
-      myProgress: "未着手"
-    },
-    {
-      id: 5,
-      name: "知識を結びつける",
-      subtitle: "Connecting Knowledge",
-      description: "異なる分野の知識を結びつけて新しい洞察を得る",
-      icon: "🔗",
-      category: "synthesis",
+      id: 23,
+      name: "教えることによる学び",
+      subtitle: "Learning by Teaching",
+      description: "他者に教えることで自分の学びを深める",
+      icon: "🏫",
+      category: "openness",
       myProgress: "実践中"
+    },
+    {
+      id: 24,
+      name: "自分で考える",
+      subtitle: "Thinking for Yourself",
+      description: "他者の意見に流されず、自分の頭で考え抜く",
+      icon: "🧠",
+      category: "openness",
+      myProgress: "学習中"
     }
   ];
 
-  // サンプル投稿データ（初期データ用）
+  // サンプル投稿データ（更新版）
   const samplePosts = [
     {
-      patternId: 1,
-      patternName: "学習への情熱",
+      patternId: 18,
+      patternName: "探究への情熱",
       situation: "新しいプログラミング言語を学ぼうと思ったとき、最初は「難しそう」という気持ちが先立ってしまいました",
       action: "まず「なぜこの言語を学びたいのか」を紙に書き出し、学習の目的を明確にしてから基本的な文法から始めました",
       reflection: "目的が明確になると、つまづいても「これは自分のビジョンのため」と思えて続けられました。情熱は意図的に育てられるものだと実感しました",
       timestamp: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
     },
     {
-      patternId: 2,
+      patternId: 21,
       patternName: "問いかけの力",
       situation: "チームミーティングで新しいアイデアについて議論していましたが、みんな「でも現実的には...」という話ばかりで停滞していました",
       action: "「もし制約が一切なかったら、どんな解決策を考えますか？」と問いかけて、制約を一度忘れてもらいました",
@@ -84,8 +262,8 @@ const App = () => {
       timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
     },
     {
-      patternId: 3,
-      patternName: "アイデアを育てる",
+      patternId: 19,
+      patternName: "小さく生んで大きく育てる",
       situation: "会議で出た小さなアイデアに対して「それは難しいのでは」という反応が多く、そのまま流されそうになりました",
       action: "「このアイデアを実現するには何が必要でしょうか？」と問いかけ、実現の方法をチーム全体で考え続けました",
       reflection: "小さなアイデアも丁寧に育てることで、実現可能な形に発展することがわかりました。アイデアは最初から完璧である必要はないと学びました",
@@ -153,6 +331,28 @@ const App = () => {
       case '実践中': return 'bg-blue-100 text-blue-800';
       case '学習中': return 'bg-yellow-100 text-yellow-800';
       default: return 'bg-gray-100 text-gray-600';
+    }
+  };
+
+  // カテゴリーごとの色を取得
+  const getCategoryColor = (category) => {
+    switch(category) {
+      case 'core': return 'bg-purple-100 text-purple-800 border-purple-200';
+      case 'opportunity': return 'bg-blue-100 text-blue-800 border-blue-200';
+      case 'creation': return 'bg-green-100 text-green-800 border-green-200';
+      case 'openness': return 'bg-orange-100 text-orange-800 border-orange-200';
+      default: return 'bg-gray-100 text-gray-600 border-gray-200';
+    }
+  };
+
+  // カテゴリー名を取得
+  const getCategoryName = (category) => {
+    switch(category) {
+      case 'core': return 'Core';
+      case 'opportunity': return 'Opportunity';
+      case 'creation': return 'Creation';
+      case 'openness': return 'Openness';
+      default: return 'その他';
     }
   };
 
@@ -247,49 +447,73 @@ const App = () => {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-900">🛠️ 学習パターン</h2>
-              <button 
-                onClick={() => setCurrentView('community')}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors mr-4"
-              >
-                💬 みんなの体験を見る
-              </button>
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600">
+                  全{learningPatterns.length}パターン
+                </span>
+                <button 
+                  onClick={() => setCurrentView('community')}
+                  className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                >
+                  💬 みんなの体験を見る
+                </button>
+              </div>
             </div>
-            
+
             {loading && (
               <div className="text-center py-8">
                 <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
                 <p className="mt-2 text-gray-600">読み込み中...</p>
               </div>
             )}
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {learningPatterns.map(pattern => (
-                <div 
-                  key={pattern.id}
-                  className="pattern-card bg-white rounded-xl p-6 shadow-sm border hover:shadow-lg transition-all cursor-pointer transform hover:-translate-y-1"
-                  onClick={() => {
-                    setSelectedPattern(pattern);
-                    setCurrentView('pattern-detail');
-                  }}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl">{pattern.icon}</span>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getProgressColor(pattern.myProgress)}`}>
-                      {pattern.myProgress}
+
+            {/* カテゴリー別表示 */}
+            {['core', 'opportunity', 'creation', 'openness'].map(category => {
+              const categoryPatterns = learningPatterns.filter(p => p.category === category);
+              return (
+                <div key={category} className="mb-10">
+                  <div className="flex items-center space-x-3 mb-4">
+                    <h3 className={`text-lg font-bold px-3 py-1 rounded-full border ${getCategoryColor(category)}`}>
+                      {getCategoryName(category)}
+                    </h3>
+                    <span className="text-sm text-gray-500">
+                      {categoryPatterns.length}パターン
                     </span>
                   </div>
-                  <h3 className="font-bold text-lg text-gray-900 mb-2">{pattern.name}</h3>
-                  <p className="text-gray-600 text-sm mb-4">{pattern.description}</p>
-                  <div className="flex items-center justify-between text-sm text-gray-500">
-                    <span className="flex items-center space-x-1">
-                      <span>📝</span>
-                      <span>{getPatternPostCount(pattern.id)}件の体験</span>
-                    </span>
-                    <span>📈</span>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {categoryPatterns.map(pattern => (
+                      <div 
+                        key={pattern.id}
+                        className="pattern-card bg-white rounded-xl p-5 shadow-sm border hover:shadow-lg transition-all cursor-pointer transform hover:-translate-y-1"
+                        onClick={() => {
+                          setSelectedPattern(pattern);
+                          setCurrentView('pattern-detail');
+                        }}
+                      >
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="text-2xl">{pattern.icon}</span>
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getProgressColor(pattern.myProgress)}`}>
+                            {pattern.myProgress}
+                          </span>
+                        </div>
+                        <h4 className="font-bold text-md text-gray-900 mb-2">{pattern.name}</h4>
+                        <p className="text-gray-600 text-sm mb-3 overflow-hidden" style={{display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical'}}>{pattern.description}</p>
+                        <div className="flex items-center justify-between text-sm text-gray-500">
+                          <span className="flex items-center space-x-1">
+                            <span>📝</span>
+                            <span>{getPatternPostCount(pattern.id)}件</span>
+                          </span>
+                          <span className={`px-2 py-1 rounded-full text-xs border ${getCategoryColor(pattern.category)}`}>
+                            {getCategoryName(pattern.category)}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
 
           {/* 最近の体験共有 */}
