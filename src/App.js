@@ -423,12 +423,17 @@ const App = () => {
         <main className="max-w-6xl mx-auto px-4 py-8">
           
           {/* 今週のチャレンジ */}
-          <div className="bg-gradient-to-r from-green-400 to-yellow-400 rounded-2xl p-6 text-white mb-8">
+          <div 
+            className="rounded-2xl p-6 text-white mb-8"
+            style={{
+              background: 'linear-gradient(to right, #4ade80, #facc15)'
+            }}
+          >
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl font-bold mb-2">今週のパターンチャレンジ</h2>
-                <p className="text-green-100">「問いかけの力」を実践してみよう</p>
-                <div className="flex items-center mt-3 space-x-4 text-sm text-green-100">
+                <p style={{ color: 'rgba(255, 255, 255, 0.8)' }}>「問いかけの力」を実践してみよう</p>
+                <div className="flex items-center mt-3 space-x-4 text-sm" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
                   <span className="flex items-center space-x-1">
                     <span>👥</span>
                     <span>参加者 6人</span>
