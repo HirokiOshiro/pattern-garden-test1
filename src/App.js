@@ -468,11 +468,11 @@ const App = () => {
             )}
 
             {/* カテゴリー別表示 */}
-            {['core', 'opportunity', 'creation', 'openness'].map(category => {
+            {['core', 'opportunity', 'creation', 'openness'].map((category, index) => {
               const categoryPatterns = learningPatterns.filter(p => p.category === category);
               return (
-                <div key={category} className="mb-12">
-                  <div className="flex items-center space-x-3 mb-6">
+                <div key={category} className={`${index > 0 ? 'mt-16' : ''} mb-8`}>
+                  <div className="flex items-center space-x-3 mb-4">
                     <h3 className={`text-lg font-bold px-3 py-1 rounded-full border ${getCategoryColor(category)}`}>
                       {getCategoryName(category)}
                     </h3>
