@@ -404,7 +404,12 @@ const App = () => {
           <div className="max-w-6xl mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-green-400 to-yellow-400 rounded-full flex items-center justify-center">
+                <div 
+                  className="w-10 h-10 rounded-full flex items-center justify-center"
+                  style={{
+                    background: 'linear-gradient(to right, #4ade80, #facc15)'
+                  }}
+                >
                   <span className="text-white font-bold text-lg">🌱</span>
                 </div>
                 <div>
