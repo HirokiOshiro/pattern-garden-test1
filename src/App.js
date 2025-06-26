@@ -503,6 +503,60 @@ const App = () => {
     );
   };
 
+  // 今日のパターンチャレンジを取得する関数
+  const getTodaysChallenge = () => {
+    // 今日の日付から一意のインデックスを生成
+    const today = new Date();
+    const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+    const patternIndex = dayOfYear % learningPatterns.length;
+    
+    const todaysPattern = learningPatterns[patternIndex];
+    
+    // チャレンジの詳細設定
+    const challengeDetails = {
+      participants: Math.floor(Math.random() * 15) + 5, // 5-20人のランダム参加者数
+      duration: ['今日1日', '2日間', '3日間'][Math.floor(Math.random() * 3)],
+      description: getChallengeDescription(todaysPattern)
+    };
+    
+    return {
+      pattern: todaysPattern,
+      ...challengeDetails
+    };
+  };
+
+  // パターンごとのチャレンジ説明を生成
+  const getChallengeDescription = (pattern) => {
+    const challengeTexts = {
+      "創造的な学び": "今日出会う情報を2つ以上組み合わせて新しいアイデアを考えてみよう",
+      "学びのチャンス": "いつもの行動の中で「学べることはないか？」と3回問いかけてみよう",
+      "つくることによる学び": "今日学んだことを何か小さなものに「作って」表現してみよう",
+      "学びをひらく": "今日の学びを誰かと共有してみよう",
+      "まずはつかる": "今日、理論より先に実践に飛び込む場面を作ってみよう",
+      "まねぶことから": "今日、尊敬する人の行動を1つ真似してみよう",
+      "教わり上手になる": "今日、誰かに質問して新しいことを教わってみよう",
+      "アウトプットから始まる学び": "今日学びたいことを、まず何かを作ることから始めてみよう",
+      "学びのなかの遊び": "今日の学習に遊び心を1つ取り入れてみよう",
+      "学びの竜巻": "今日、興味のあることに集中して取り組む時間を作ってみよう",
+      "知のワクワク": "今日学ぶことの「なぜ面白いのか」を言葉にしてみよう",
+      "量は質を生む": "今日、まずは量をこなすことを意識して取り組んでみよう",
+      "動きのなかで考える": "今日、歩きながらor動きながら考える時間を作ってみよう",
+      "プロトタイピング": "今日のアイデアを簡単な形で素早く試してみよう",
+      "フィールドに飛び込む": "今日、いつもと違う環境で学んでみよう",
+      "鳥の眼と虫の眼": "今日、全体を見る時間と詳細を見る時間を意識的に分けてみよう",
+      "隠れた関係性から学ぶ": "今日、一見関係なさそうな2つのことの繋がりを探してみよう",
+      "探究への情熱": "今日、「なぜ？」を3回以上口に出して探究してみよう",
+      "小さく生んで大きく育てる": "今日、小さなアイデアを1つ大切に育ててみよう",
+      "学びの共同体をつくる": "今日、誰かと一緒に学ぶ機会を作ってみよう",
+      "問いかけの力": "今日、良い問いを1つ誰かに投げかけてみよう",
+      "はなすことでわかる": "今日学んだことを誰かに話して理解を深めてみよう",
+      "教えることによる学び": "今日、誰かに何かを教える機会を作ってみよう",
+      "自分で考える": "今日、他人の意見を聞く前に自分で考える時間を作ってみよう"
+    };
+    
+    return challengeTexts[pattern.name] || `「${pattern.name}」を今日実践してみよう`;
+  };
+
   // ホーム画面
   if (currentView === 'home') {
     return (
@@ -535,31 +589,42 @@ const App = () => {
         {/* メインコンテンツ */}
         <main className="max-w-6xl mx-auto px-4 py-8">
           
-          {/* 今週のチャレンジ */}
-          <div 
-            className="rounded-2xl p-6 text-white mb-8"
-            style={{
-              background: 'linear-gradient(to right, #4ade80, #facc15)'
-            }}
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-xl font-bold mb-2">今週のパターンチャレンジ</h2>
-                <p style={{ color: 'rgba(255, 255, 255, 0.8)' }}>「問いかけの力」を実践してみよう</p>
-                <div className="flex items-center mt-3 space-x-4 text-sm" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
-                  <span className="flex items-center space-x-1">
-                    <span>👥</span>
-                    <span>参加者 6人</span>
-                  </span>
-                  <span className="flex items-center space-x-1">
-                    <span>📅</span>
-                    <span>2週間テスト中</span>
-                  </span>
+          {/* 今日のチャレンジ */}
+          {(() => {
+            const todaysChallenge = getTodaysChallenge();
+            return (
+              <div 
+                className="rounded-2xl p-6 text-white mb-8"
+                style={{
+                  background: 'linear-gradient(to right, #4ade80, #facc15)'
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-xl font-bold mb-2">今日のパターンチャレンジ</h2>
+                    <p style={{ color: 'rgba(255, 255, 255, 0.9)' }} className="mb-2">
+                      {todaysChallenge.description}
+                    </p>
+                    <div className="flex items-center mt-3 space-x-4 text-sm" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>
+                      <span className="flex items-center space-x-1">
+                        <span>👥</span>
+                        <span>参加者 {todaysChallenge.participants}人</span>
+                      </span>
+                      <span className="flex items-center space-x-1">
+                        <span>📅</span>
+                        <span>{todaysChallenge.duration}チャレンジ</span>
+                      </span>
+                      <span className="flex items-center space-x-1">
+                        <span>🎯</span>
+                        <span>{todaysChallenge.pattern.name}</span>
+                      </span>
+                    </div>
+                  </div>
+                  <div className="text-6xl">{todaysChallenge.pattern.icon}</div>
                 </div>
               </div>
-              <div className="text-6xl">❓</div>
-            </div>
-          </div>
+            );
+          })()}
 
           {/* パターン一覧 */}
           <div className="mb-8">
