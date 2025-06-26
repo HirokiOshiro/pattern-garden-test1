@@ -9,6 +9,8 @@ const App = () => {
   const [showPostForm, setShowPostForm] = useState(false);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  // 新しく追加
+  const [patternProgress, setPatternProgress] = useState({});
   const [newPost, setNewPost] = useState({
     pattern: '',
     situation: '',
@@ -324,6 +326,38 @@ const App = () => {
     fetchPosts();
   }, []);
 
+  // 進捗更新処理
+  const updatePatternProgress = async (patternId, newProgress) => {
+    try {
+      setLoading(true);
+      
+      // Firestoreに保存（将来的な拡張）
+      // await addDoc(collection(db, 'userProgress'), {
+      //   patternId,
+      //   progress: newProgress,
+      //   userId: 'current-user-id',
+      //   updatedAt: new Date()
+      // });
+      
+      // ローカル状態を更新
+      setPatternProgress(prev => ({
+        ...prev,
+        [patternId]: newProgress
+      }));
+      
+    } catch (error) {
+      console.error('進捗の更新に失敗しました:', error);
+      alert('進捗の更新に失敗しました。もう一度お試しください。');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // パターンの進捗を取得（ローカル状態 > デフォルト値）
+  const getPatternProgress = (pattern) => {
+    return patternProgress[pattern.id] || pattern.myProgress;
+  };
+
   // 進捗状況の色を取得
   const getProgressColor = (progress) => {
     switch(progress) {
@@ -393,6 +427,40 @@ const App = () => {
         setLoading(false);
       }
     }
+  };
+
+  // 進捗選択コンポーネント
+  const ProgressSelector = ({ pattern, currentProgress, onProgressChange }) => {
+    const progressOptions = [
+      { value: '未着手', label: '未着手', color: 'bg-gray-100 text-gray-600' },
+      { value: '学習中', label: '学習中', color: 'bg-yellow-100 text-yellow-800' },
+      { value: '実践中', label: '実践中', color: 'bg-blue-100 text-blue-800' },
+      { value: 'マスター', label: 'マスター', color: 'bg-green-100 text-green-800' }
+    ];
+
+    return (
+      <div className="relative group">
+        <button className={`px-2 py-1 rounded-full text-xs font-medium ${getProgressColor(currentProgress)} hover:opacity-80 transition-opacity`}>
+          {currentProgress}
+        </button>
+        
+        <div className="absolute right-0 top-full mt-1 bg-white border rounded-lg shadow-lg z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+          <div className="p-2 space-y-1 min-w-24">
+            {progressOptions.map(option => (
+              <button
+                key={option.value}
+                onClick={() => onProgressChange(pattern.id, option.value)}
+                className={`w-full text-left px-3 py-1 rounded text-xs font-medium transition-colors hover:bg-gray-50 ${
+                  currentProgress === option.value ? option.color : 'text-gray-600'
+                }`}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
   };
 
   // ホーム画面
@@ -492,34 +560,41 @@ const App = () => {
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {categoryPatterns.map(pattern => (
-                      <div 
-                        key={pattern.id}
-                        className="pattern-card bg-white rounded-xl p-6 shadow-sm border hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
-                        onClick={() => {
-                          setSelectedPattern(pattern);
-                          setCurrentView('pattern-detail');
-                        }}
-                      >
-                        <div className="flex items-center justify-between mb-4">
-                          <span className="text-2xl">{pattern.icon}</span>
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getProgressColor(pattern.myProgress)}`}>
-                            {pattern.myProgress}
-                          </span>
+                    {categoryPatterns.map(pattern => {
+                      const currentProgress = getPatternProgress(pattern);
+                      return (
+                        <div 
+                          key={pattern.id}
+                          className="pattern-card bg-white rounded-xl p-6 shadow-sm border hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
+                          onClick={() => {
+                            setSelectedPattern(pattern);
+                            setCurrentView('pattern-detail');
+                          }}
+                        >
+                          <div className="flex items-center justify-between mb-4">
+                            <span className="text-2xl">{pattern.icon}</span>
+                            <div onClick={(e) => e.stopPropagation()}>
+                              <ProgressSelector 
+                                pattern={pattern}
+                                currentProgress={currentProgress}
+                                onProgressChange={updatePatternProgress}
+                              />
+                            </div>
+                          </div>
+                          <h4 className="font-bold text-md text-gray-900 mb-3">{pattern.name}</h4>
+                          <p className="text-gray-600 text-sm mb-4 overflow-hidden leading-relaxed" style={{display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical'}}>{pattern.description}</p>
+                          <div className="flex items-center justify-between text-sm text-gray-500 pt-2 border-t border-gray-100">
+                            <span className="flex items-center space-x-1">
+                              <span>📝</span>
+                              <span>{getPatternPostCount(pattern.id)}件</span>
+                            </span>
+                            <span className={`px-2 py-1 rounded-full text-xs border ${getCategoryColor(pattern.category)}`}>
+                              {getCategoryName(pattern.category)}
+                            </span>
+                          </div>
                         </div>
-                        <h4 className="font-bold text-md text-gray-900 mb-3">{pattern.name}</h4>
-                        <p className="text-gray-600 text-sm mb-4 overflow-hidden leading-relaxed" style={{display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical'}}>{pattern.description}</p>
-                        <div className="flex items-center justify-between text-sm text-gray-500 pt-2 border-t border-gray-100">
-                          <span className="flex items-center space-x-1">
-                            <span>📝</span>
-                            <span>{getPatternPostCount(pattern.id)}件</span>
-                          </span>
-                          <span className={`px-2 py-1 rounded-full text-xs border ${getCategoryColor(pattern.category)}`}>
-                            {getCategoryName(pattern.category)}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               );
@@ -561,6 +636,7 @@ const App = () => {
   // パターン詳細画面
   if (currentView === 'pattern-detail' && selectedPattern) {
     const patternPosts = posts.filter(post => post.patternId === selectedPattern.id);
+    const currentProgress = getPatternProgress(selectedPattern);
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
@@ -593,9 +669,11 @@ const App = () => {
                   <span>📝</span>
                   <span>{patternPosts.length}件の体験</span>
                 </span>
-                <span className={`px-3 py-1 rounded-full text-xs font-medium ${getProgressColor(selectedPattern.myProgress)}`}>
-                  {selectedPattern.myProgress}
-                </span>
+                <ProgressSelector 
+                  pattern={selectedPattern}
+                  currentProgress={currentProgress}
+                  onProgressChange={updatePatternProgress}
+                />
               </div>
               <button 
                 onClick={() => {
