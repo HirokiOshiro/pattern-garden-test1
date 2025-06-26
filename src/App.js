@@ -9,8 +9,9 @@ const App = () => {
   const [showPostForm, setShowPostForm] = useState(false);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  // 新しく追加
   const [patternProgress, setPatternProgress] = useState({});
+  // 進捗メニューの開閉状態を管理
+  const [openProgressMenu, setOpenProgressMenu] = useState(null);
   const [newPost, setNewPost] = useState({
     pattern: '',
     situation: '',
@@ -429,7 +430,7 @@ const App = () => {
     }
   };
 
-  // 進捗選択コンポーネント
+  // 進捗選択コンポーネント（開閉式）
   const ProgressSelector = ({ pattern, currentProgress, onProgressChange }) => {
     const progressOptions = [
       { value: '未着手', label: '未着手', color: 'bg-gray-100 text-gray-600' },
@@ -438,27 +439,66 @@ const App = () => {
       { value: 'マスター', label: 'マスター', color: 'bg-green-100 text-green-800' }
     ];
 
+    const isOpen = openProgressMenu === pattern.id;
+
+    const handleProgressChange = (newProgress) => {
+      onProgressChange(pattern.id, newProgress);
+      setOpenProgressMenu(null); // メニューを閉じる
+    };
+
+    const toggleMenu = (e) => {
+      e.stopPropagation();
+      setOpenProgressMenu(isOpen ? null : pattern.id);
+    };
+
     return (
-      <div className="relative group">
-        <button className={`px-2 py-1 rounded-full text-xs font-medium ${getProgressColor(currentProgress)} hover:opacity-80 transition-opacity`}>
-          {currentProgress}
+      <div className="relative">
+        <button 
+          onClick={toggleMenu}
+          className={`px-2 py-1 rounded-full text-xs font-medium transition-all duration-200 ${getProgressColor(currentProgress)} ${
+            isOpen ? 'ring-2 ring-blue-300' : 'hover:opacity-80'
+          }`}
+        >
+          <span>{currentProgress}</span>
+          <span className={`ml-1 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}>
+            ▼
+          </span>
         </button>
         
-        <div className="absolute right-0 top-full mt-1 bg-white border rounded-lg shadow-lg z-10 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-          <div className="p-2 space-y-1 min-w-24">
-            {progressOptions.map(option => (
-              <button
-                key={option.value}
-                onClick={() => onProgressChange(pattern.id, option.value)}
-                className={`w-full text-left px-3 py-1 rounded text-xs font-medium transition-colors hover:bg-gray-50 ${
-                  currentProgress === option.value ? option.color : 'text-gray-600'
-                }`}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        </div>
+        {isOpen && (
+          <>
+            {/* 背景オーバーレイ（メニュー外クリックで閉じる） */}
+            <div 
+              className="fixed inset-0 z-10" 
+              onClick={() => setOpenProgressMenu(null)}
+            />
+            
+            {/* ドロップダウンメニュー */}
+            <div className="absolute right-0 top-full mt-1 bg-white border rounded-lg shadow-lg z-20 min-w-24">
+              <div className="p-2 space-y-1">
+                {progressOptions.map(option => (
+                  <button
+                    key={option.value}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleProgressChange(option.value);
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded text-xs font-medium transition-colors hover:bg-gray-50 ${
+                      currentProgress === option.value 
+                        ? `${option.color} font-semibold` 
+                        : 'text-gray-600'
+                    }`}
+                  >
+                    <span className="flex items-center justify-between">
+                      <span>{option.label}</span>
+                      {currentProgress === option.value && <span>✓</span>}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     );
   };
