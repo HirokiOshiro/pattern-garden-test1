@@ -373,9 +373,9 @@ const App = () => {
   const getCategoryColor = (category) => {
     switch(category) {
       case 'core': return 'bg-purple-100 text-purple-800 border-purple-200';
-      case 'opportunity': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'creation': return 'bg-green-100 text-green-800 border-green-200';
-      case 'openness': return 'bg-orange-100 text-orange-800 border-orange-200';
+      case 'opportunity': return 'bg-purple-100 text-purple-800 border-purple-200';
+      case 'creation': return 'bg-purple-100 text-purple-800 border-purple-200';
+      case 'openness': return 'bg-purple-100 text-purple-800 border-purple-200';
       default: return 'bg-gray-100 text-gray-600 border-gray-200';
     }
   };
